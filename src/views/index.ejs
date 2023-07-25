@@ -1,0 +1,33 @@
+<!-- Usando include para separar as partes que não irão ser modificadas, como o head por exemplo. -->
+
+<%- include('includes/head')%>
+
+<body>
+    <section class="container">
+        <h1>
+
+            <% if(typeof titulo !== 'undefined') { %>
+                <%= titulo %> <!-- escapa os caracteres -->
+                <%- titulo %> <!-- não escapa os caracteres (executa) -->
+
+            <% } else{ %>
+                    O titulo não foi enviado
+                <%}%> 
+                <br>
+
+                <% numeros.forEach(num =>{ %>
+                    <%= num %>
+                <% }) %>
+
+        </h1>
+        <h2><%=csrfToken%></h2>
+    <form action="" method="post">
+        <!-- Deve-se usar o input hidden para pegar o token csrf -->
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <label>Tecnologia preferida:</label>
+        <input type="text" name="tec">
+        <button>Enviar</button>
+    </form>
+    </section>
+
+    <%- include('includes/footer');%>

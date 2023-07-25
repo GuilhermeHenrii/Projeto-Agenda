@@ -1,0 +1,5 @@
+<% Controle de fluxo (for, if...) %>
+<%= Imprime escapando caracteres %>
+<%- Imprime executando o trecho (não escapa) %>
+<%# Comentário %>
+<%- include('caminho/arquivo'); %>
