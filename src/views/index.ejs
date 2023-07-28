@@ -1,33 +1,30 @@
-<!-- Usando include para separar as partes que não irão ser modificadas, como o head por exemplo. -->
+<%- include('includes/head') %>
 
-<%- include('includes/head')%>
+<%- include('includes/navbar.ejs') %>
 
-<body>
-    <section class="container">
-        <h1>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2"></div>
 
-            <% if(typeof titulo !== 'undefined') { %>
-                <%= titulo %> <!-- escapa os caracteres -->
-                <%- titulo %> <!-- não escapa os caracteres (executa) -->
+        <div class="col lg-8 my-3">
+            <h1 class="text-center">Agenda</h1>
+            <p class="text-center lead">Seus contatos estão abaixo</p>
 
-            <% } else{ %>
-                    O titulo não foi enviado
-                <%}%> 
-                <br>
+            <div class="responsive-table">
+                <table class="table my-3">
+                    <tr>
+                        <td>Luiz</td>
+                        <td>Otavio</td>
+                        <td>otaviomiranda@gmail.com</td>
+                        <td>2299988770</td>
+                    </tr>
+                </table>
+            </div>
 
-                <% numeros.forEach(num =>{ %>
-                    <%= num %>
-                <% }) %>
+        </div>
 
-        </h1>
-        <h2><%=csrfToken%></h2>
-    <form action="" method="post">
-        <!-- Deve-se usar o input hidden para pegar o token csrf -->
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-        <label>Tecnologia preferida:</label>
-        <input type="text" name="tec">
-        <button>Enviar</button>
-    </form>
-    </section>
+        <div class="col-lg-2"></div>
+    </div>
+</div>
 
-    <%- include('includes/footer');%>
+<%- include('includes/footer') %>

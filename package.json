@@ -1,5 +1,5 @@
 {
-  "name": "aula15",
+  "name": "projeto-agenda",
   "version": "1.0.0",
   "main": "serve.js",
   "scripts": {
@@ -23,7 +23,8 @@
     "helmet": "^7.0.0",
     "mongoose": "^7.3.4",
     "regenerator-runtime": "^0.13.11",
-    "style-loader": "^3.3.3"
+    "style-loader": "^3.3.3",
+    "validator": "^13.9.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.5",

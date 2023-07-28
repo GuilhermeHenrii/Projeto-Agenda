@@ -1,17 +1,18 @@
 exports.middlewareGlobal = (req, res, next) => {
-    //Caso queiramos renderizar algo na tela em todas as rotas, podemos usar um middleware global, como é o caso deste.
-    //Podendo ser qualquer coisa.
-    res.locals.umavariavelLocal = 'Uma variavel local';
+    //Usando o midlleware global para criar a variavel errors/success para ser acessada no arquivo ejs.
+    res.locals.errors = req.flash('errors');
+    res.locals.success = req.flash('success');
     next();
 }
 
 //configurando os middlewares do csrfToken
 exports.checkErrorCsrf = (err, req, res, next) => {
-    if(err && 'EBADCSRFTOKEN' === err.code){
+    if(err){
         return res.render('error');
     }
-}
 
+    next();
+}
 
 exports.csfrMiddleware = (req, res, next) =>{
     res.locals.csrfToken = req.csrfToken();
