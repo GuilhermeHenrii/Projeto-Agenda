@@ -1,6 +1,10 @@
 const { create } = require('connect-mongo');
 const mongoose = require('mongoose');
+//biblioteca validator para validar os valores dos inputs
 const validator = require('validator');
+//biblioteca que gera um hash com o valor da senha
+const bcryptjs = require('bcryptjs');
+
 
 const LoginSchema = new mongoose.Schema({
     //Configurei o schema para email e senha, ambos do tipo string e requeridos.
@@ -17,19 +21,61 @@ class Login{
         this.user = null;         
     }
 
+    async login(){
+        //vai validar e retornar o objeto limpo
+        this.valida();
+        //verificação de erros
+        if(this.errors.length > 0) return;
+
+        //fazendo um consulta na banco para ver se existe algum email igual ao passado na requisição
+        this.user = await LoginModel.findOne({email: this.body.email});
+
+        //se não existir usuario, erro é lançado
+        if(!this.user){
+            this.errors.push('Usuário não existe');
+            return;
+        }
+
+        //se email existir, verifica a senha
+        if(!bcryptjs.compareSync(this.body.password, this.user.password)){
+            this.errors.push('Senha inválida');
+            //setando o valor de this.user em null para manter seu estado apropriado, já que estamos falando de um erro
+            this.user = null;
+            return;
+        }
+    }
+
     //Quando fizemos uma operação com banco de dados, necessariamente temos que fazer uma promessa.
     async register(){
         this.valida();
         if(this.errors.length > 0) return;
-        //Criando um usuario e colocando sue valor enm this.user, para ficar acessível tanto no model quando no controller.
+
+        //metodo que verifica se o usuario ja existe no db
+        await this.userExists();
+        if(this.errors.length > 0) return;
+
+        //usando o bcrypt para criar o hash da senha
+        const salt = bcryptjs.genSaltSync();
+        this.body.password = bcryptjs.hashSync(this.body.password, salt);
+
+
+
+        //Criando um usuario e colocando seu valor em this.user, para ficar acessível tanto no model quando no controller.
 
         //Como estamos tratando de uma de uma promisse, precisamos envolve-la com o try-cath, pq se não teremos uma promessa não resolvida e não saberemos qual o erro que está ocorrendo.
-        try{
-            this.user = await LoginModel.create(this.body);
-        }catch(e){
-            console.log(e);
-        }
+
+        //tty-catch retirado, pois o mesmo inibiria o funcionamento do try-catch do loginController.
+
+        this.user = await LoginModel.create(this.body);
         
+    }
+
+    async userExists(){
+        //Vendo se na base de dados existe um email igual ao email que esta sendo enviado na requisição.
+        this.user = await LoginModel.findOne({email: this.body.email});
+        
+        //caso a constante user seja true, ou seja, ja exista no db um erro será retornado.
+        if(this.user) this.errors.push('Já existe um usuário com esse email.')
     }
 
     valida(){
@@ -39,7 +85,7 @@ class Login{
         if(!validator.isEmail(this.body.email)) this.errors.push('E-mail inválido');
 
         //A senha precisa ter entre 3 e 30 caracteres
-        if(this.body.password < 3 || this.body.password > 30){
+        if(this.body.password.length < 3 || this.body.password.length > 30){
             this.errors.push('Senha precisa ter entre 3 e 30 caracteres');
         }
     }

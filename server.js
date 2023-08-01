@@ -56,7 +56,7 @@ const sessionOptions = session({
 app.use(sessionOptions);
 app.use(flash());
 
-app.set('views', path.resolve(__dirname, 'src', 'views'));//estou criando a view e passando seu caminho. Arquitos que renderizam na tela.
+app.set('views', path.resolve(__dirname, 'src', 'views'));//estou criando a view e passando seu caminho. Arquivos que renderizam na tela.
 app.set('view engine', 'ejs');//Aqui estou setando a view engine. Engina esse que renderizará o html da página
 
 //usando o csrf
