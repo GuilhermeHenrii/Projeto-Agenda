@@ -12,7 +12,11 @@ const mongoose = require('mongoose');
 //executando a conexão
 //.then para tratar a promessa que é retornada quando declaramos mongoose.connect
 //usando o app.emit para emitir um sinal.
-mongoose.connect(process.env.connectionstring, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.connectionstring,
+    {
+        useNewUrlParser: true, 
+        useUnifiedTopology: true
+    })
     .then(() => {
         console.log('Conectado')
         app.emit('pronto');
@@ -34,7 +38,7 @@ const path = require('path');//Trabalha com caminhos
 //importanto helmet e csrf
 const helmet = require('helmet');//Um total de 9 middlewares que tem como função tratar a seguranla do cabeçalho http da aplicação
 const csrf = require('csurf');//csrf tokens para os formularios. Nenhum app externo conseguirá postar coisas dentro da aplicação.
-const {middlewareGlobal, checkErrorCsrf, csfrMiddleware} = require ('./src/middlewares/middleware');//são funções que são executadas na rota 
+const {middlewareGlobal, checkErrorCsrf, csfrMiddleware} = require ('./src/middlewares/middleware');//são funções que são executadas em todas as rotas 
 
 //usando o helmet
 app.use(helmet());

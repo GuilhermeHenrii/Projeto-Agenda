@@ -3,12 +3,12 @@ const Login = require('../models/LoginModel');
 
 exports.index = (req, res) => {
     if(req.session.user){
+        console.log(req.session.user);
         //aq ocorrera um erro pois tem duas chamadas res na mesma rota
         res.render('usuario-logado');
     }
 
     //debudando a sessão do usuario para checar se realmente tem alguem logado.
-    console.log(req.session.user);
     return res.render('login');
 };
 

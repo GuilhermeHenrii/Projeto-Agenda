@@ -22,9 +22,6 @@ module.exports = {//é uma construção do Node.js que permite exportar um objet
                     presets:['@babel/env']
                 }
             }
-        },{
-          test: /\.css$/,
-          use: ['style-loader', 'css-loader']
         }]
     },
     devtool: 'source-map'
