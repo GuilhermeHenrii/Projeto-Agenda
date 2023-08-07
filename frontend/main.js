@@ -1,10 +1,9 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
-// import './assets/css/style.css';
-import Login from './modules/Login';
 
-const login = new Login('.login-form');
+//validando o frontend
+import Login from './modules/Login';
 const cadastro = new Login('.cadastro-form');
+const login = new Login('.login-form');
+cadastro.init();
 login.init();
-console.log('wndiwuonf')
-alert('kjidf jkiwef n')

@@ -41,10 +41,18 @@ const csrf = require('csurf');//csrf tokens para os formularios. Nenhum app exte
 const {middlewareGlobal, checkErrorCsrf, csfrMiddleware} = require ('./src/middlewares/middleware');//são funções que são executadas em todas as rotas 
 
 //usando o helmet
-app.use(helmet());
+//tive que liberar o acesso explicitamente de algumas outras fontes, visto que o helmet estava bloqueando-as devido as politicas de secgurança (CSP)
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+      'script-src': ["'self'", "'unsafe-inline'", 'https://www.google-analytics.com', 'https://code.jquery.com', 'https://cdn.jsdelivr.net']
+    },
+}));
 
 app.use(express.urlencoded({ extend:true }));//diz que podemos postar formulários para dentro da aplicação
 app.use(express.json());
+
+//como o servidor aqui está sendo programado para servir os arquivos do diretório public, o caminho relativo deve ser passado a partir do mesmo.
 app.use(express.static(path.resolve(__dirname, 'public')));//criando o express static e resolvendo seu caminho absoluto. São todos os arquivos estáticos que devem ser acessados direto, na aplicação.
 
 const sessionOptions = session({

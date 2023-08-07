@@ -1,4 +1,6 @@
 //Configuração webpack
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { plugin } = require('mongoose');
 const path = require('path');//importa o módulo path do Node.js, que fornece utilitários para manipulação de caminhos de arquivos e diretórios.
 
 module.exports = {//é uma construção do Node.js que permite exportar um objeto como um módulo para uso em outros arquivos.
@@ -8,14 +10,14 @@ module.exports = {//é uma construção do Node.js que permite exportar um objet
         path: path.resolve(__dirname, 'public', 'assets', 'js'),//especifica o diretório de saída para os arquivos empacotados.
         filename: 'bundle.js'// define o nome do arquivo de saída.
     },
+    plugins: [
+        new CleanWebpackPlugin()
+    ],
 
     module: {
         rules: [{
-
             exclude: /node_modules/,
-
             test: /\.js$/,
-
             use:{
                 loader: 'babel-loader',
                 options: {
@@ -25,4 +27,4 @@ module.exports = {//é uma construção do Node.js que permite exportar um objet
         }]
     },
     devtool: 'source-map'
-}
+};
