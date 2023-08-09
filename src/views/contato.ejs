@@ -14,14 +14,15 @@
 
             <!-- Condicional que verifica se, tivermos o id do usuario, o post não executará novamente a rota que redireciona para salvar o contato e sim para outra rota que vai permitir a edição desse contato, sendo assim se alterarmos algo em um contato ja criado, redirecionameros esse post para uma rota que usará o UPDATE no banco de dados -->
             <% if(contato._id) { %>
-                <form action="/contato/edit/<%= contato._id %>" method="POST" autocomplete="off">
+                <form action="/contato/edit/<%= contato._id %>" method="POST" autocomplete="off" class="edit-form">
             <% } else { %>
-                <form action="/contato/register" method="POST" autocomplete="off">
+                <form action="/contato/register" method="POST" autocomplete="off" class="register-form">
             <% } %>
                 <input type="hidden" name="_csrf" value= <%= csrfToken %>>
                 <div class="form-group">
                     <label>Nome</label>
                     <input type="text" value="<%= contato.nome %>" class="form-control" name="nome">
+                    <div class="div-error"></div>
                 </div>
 
                 <div class="form-group">

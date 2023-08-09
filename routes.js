@@ -12,7 +12,7 @@ const {loginRequired} = require('./src/middlewares/middleware');
 //Rotas da home
 route.get('/', homeController.index);
 
-//Rotas do index
+//Rotas do login index
 route.get('/login/index', loginController.index);
 
 //rota do register
