@@ -12,7 +12,7 @@
 
             <%- include('includes/messages') %>
 
-            <% if(contatos.length > 0) { %>
+            <% if(contatos.length > 0 && user) { %>
             <div class="responsive-table">
                 <table class="table my-3">
                     <!-- Laço de repetição que irá itarar sobre todos os contatos criados e os injetará na tela -->

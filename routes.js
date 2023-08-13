@@ -12,13 +12,13 @@ const {loginRequired} = require('./src/middlewares/middleware');
 //Rotas da home
 route.get('/', homeController.index);
 
-//Rotas do login index
+//Rotas do get do login 
 route.get('/login/index', loginController.index);
 
-//rota do register
+//rota do post do register
 route.post('/login/register', loginController.register);
 
-//rota de login
+//rota do post do login
 route.post('/login/login', loginController.login);
 
 //rota para desconctar o usuario
@@ -28,7 +28,7 @@ route.get('/login/logout', loginController.logout);
 //Usando o Get pois estamos requerindo uma pagina e nao postando algo
 route.get('/contato/index', loginRequired, contatoController.index);
 route.post('/contato/register', loginRequired, contatoController.register);
-//quando eu registro um
+//quando eu registro um contato
 route.get('/contato/index/:id', loginRequired, contatoController.editIndex);
 
 //rota que vai tratar o update do formulario enviado com os dados do contato salvo

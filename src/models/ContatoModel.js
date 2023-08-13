@@ -10,7 +10,8 @@ const ContatoSchema = new mongoose.Schema({
     telefone: {type: Number, required: false, default: ''},
     
     //vai pegar automaticamente a hora quando um contato foi criado.
-    criadoEm: {type: Date, default: Date.now}
+    criadoEm: {type: Date, default: Date.now},
+    idUser: {type: String, required: false}
 });
 
 //criação do model
@@ -32,6 +33,7 @@ Contato.prototype.register = async function(){
     }
 
     this.contato = await ContatoModel.create(this.body);
+    // this.contato.idUser 
 }
 
 Contato.prototype.valida = function (){
@@ -83,8 +85,9 @@ Contato.buscaPorId = async function(id){
 }
 
 //método estático que retorna todos os contatos e ordenando pela propriedade criadoEm, em ordem decrescente.
-Contato.buscaContatos = async function(){
-    const contatos = await ContatoModel.find()
+//{idUser}
+ContatoModel.buscaContatos = async function(id){
+    const contatos = await this.find({idUser: id})
         .sort({criadoEm: -1});
 
     return contatos;
@@ -98,4 +101,6 @@ Contato.delete = async function(id){
     return contato;
 }
 
-module.exports = Contato
+const model = mongoose.model('Contato', ContatoSchema);
+
+module.exports = {Contato, model};

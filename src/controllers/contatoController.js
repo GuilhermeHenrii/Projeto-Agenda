@@ -1,5 +1,5 @@
 const { async } = require('regenerator-runtime');
-const Contato = require('../models/ContatoModel')
+const {Contato, model} = require('../models/ContatoModel');
 
 exports.index = function (req, res){
     res.render('contato', {
@@ -12,7 +12,14 @@ exports.index = function (req, res){
 exports.register = async (req, res) =>{
     try{
     const contato = new Contato(req.body);
+    //ta dando erro aqui, contato.register is not a function
     await contato.register();
+
+    //criamos uma chave idUser e colocamos ela como nao requerida, apos isso atribuimos seu valor ao id do usuario e salvamos isso no banco de dados. Agr todo contato salvo tera o id do usuario que o salvou.
+    contato.contato.idUser = res.locals.user._id;
+    await contato.contato.save();
+   
+    console.log(contato.contato.idUser);
 
     if(contato.errors.length > 0){
         req.flash('errors', contato.errors);
@@ -45,6 +52,8 @@ exports.edit = async function(req, res) {
         if(!req.params.id) return res.render('error');
         const contato = new Contato(req.body);
         await contato.edit(req.params.id);
+        contato.contato.idUser = res.locals.user._id;
+        await contato.contato.save();
 
         if(contato.errors.length > 0){
             req.flash('errors', contato.errors);

@@ -84,17 +84,24 @@ export default class CadastraContato {
             this.generatesFieldError(inputSurname, `${inputSurname.name} inválido`);
         }
 
-        // if (!inputPhone.value) {
-        //     error = true;
-        //     inputPhone.value = '';
-        // }
+        if(inputEmail.value.trim() !== ''){
+            if(!validator.isEmail(inputEmail.value)){
+                error = true;
+                this.generatesFieldError(inputEmail, `${inputEmail.name} inválido`);
+            };
+        }
 
-        if (inputPhone.value.length <= 0 && inputEmail.value.length <= 0) {
+        //logica usada para verificar se o campo nao esta vazio, se n tiver verifica os campos. Se OS DOIS campos estiverem vazios, o erro é gerado. Se um tiver vazio e o outro preenchido e válido, o cadastro é feito.
+        if(inputPhone.value.trim() !== ''){
+            if(!validator.isMobilePhone(inputPhone.value)){
+                error = true;
+                this.generatesFieldError(inputPhone, `${inputPhone.name} inválido`);  
+            }
+        }
+
+        if(inputEmail.value.trim() === '' && inputPhone.value.trim() === ''){
             error = true;
-            this.generatesGeneralError(paragraph, `Os campos ${inputPhone.name} ou ${inputEmail.name} devem ser preechidos`)
-        } else if (!validator.isEmail(inputEmail.value) && !validator.isMobilePhone(inputPhone.value, 'pt-BR')) {
-            error = true;
-            this.generatesGeneralError(paragraph, `${inputPhone.name} ou ${inputEmail.name} inválido`)
+            this.generatesGeneralError(paragraph, `${inputEmail.name} ou ${inputPhone.name} devem ser preenchidos`);
         }
 
 
