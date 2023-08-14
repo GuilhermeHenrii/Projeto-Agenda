@@ -1,0 +1,17 @@
+Validar o formulário de cadastro da aplicação
+
+tentar fazer as seguintes alterações:
+
+-  O cadastro de contato armazena qual usuário está criando aquele contato e o index só listará os contatos cadastrados pelo usuário que está logado.
+
+- Em alteração de contato, caso apresente algum erro de cadastro para o usuário, a página atualizará com os valores atuais, do BD, daquele contato.
+
+- Cadastro de contato e listagem de contatos só aparecem enquanto o usuário estiver logado. Caso ele tente acessar tais páginas sem estar logado, será redirecionado para logar no sistema ou criar um novo usuário.
+
+- Em todas as telas, será exibido o nome do usuário que está logado.
+
+- Fiz módulos diferentes para validação do frontend e validei todos os formulários.
+
+- Utilizei o bootstrap instalado no dependence do node.
+
+https://chat.openai.com/share/9f4d2131-0f76-4ec1-a27d-aed92a42fbff
