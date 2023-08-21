@@ -93,7 +93,7 @@ export default class CadastraContato {
 
         //logica usada para verificar se o campo nao esta vazio, se n tiver verifica os campos. Se OS DOIS campos estiverem vazios, o erro é gerado. Se um tiver vazio e o outro preenchido e válido, o cadastro é feito.
         if(inputPhone.value.trim() !== ''){
-            if(!validator.isMobilePhone(inputPhone.value)){
+            if(!validator.isMobilePhone(inputPhone.value), 'pt-BR'){
                 error = true;
                 this.generatesFieldError(inputPhone, `${inputPhone.name} inválido`);  
             }
