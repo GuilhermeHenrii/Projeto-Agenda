@@ -23,7 +23,7 @@ mongoose.connect(process.env.connectionstring,
     })
     .catch((e) => {
         console.log(e);
-    }); 
+    });
 
 
 //Requerindo o modulo de sessão e mensagens instantaneas

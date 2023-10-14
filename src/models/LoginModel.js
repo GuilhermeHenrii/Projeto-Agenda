@@ -66,8 +66,11 @@ class Login{
 
         //tty-catch retirado, pois o mesmo inibiria o funcionamento do try-catch do loginController.
 
-        this.user = await LoginModel.create(this.body);
-        
+        try{
+            this.user = await LoginModel.create(this.body);
+        }catch(e){
+            console.log(e);
+        }
     }
 
     async userExists(){
