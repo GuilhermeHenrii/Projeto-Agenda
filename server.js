@@ -46,7 +46,7 @@ const routes = require('./routes');//são as rotas da aplicação
 const path = require('path');//Trabalha com caminhos
 
 //importanto helmet e csrf
-const helmet = require('helmet');//Um total de 9 middlewares que tem como função tratar a segurança do cabeçalho http da aplicação
+// const helmet = require('helmet');//Um total de 9 middlewares que tem como função tratar a segurança do cabeçalho http da aplicação
 const csrf = require('csurf');//csrf tokens para os formularios. Nenhum app externo conseguirá postar coisas dentro da aplicação.
 const {middlewareGlobal, checkErrorCsrf, csrfMiddleware} = require ('./src/middlewares/middleware');//são funções que são executadas em todas as rotas 
 
