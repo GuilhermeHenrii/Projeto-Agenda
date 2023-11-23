@@ -52,12 +52,12 @@ const {middlewareGlobal, checkErrorCsrf, csrfMiddleware} = require ('./src/middl
 
 //usando o helmet
 //tive que liberar o acesso explicitamente de algumas outras fontes, visto que o helmet estava bloqueando-as devido as politicas de secgurança (CSP)
-app.use(helmet.contentSecurityPolicy({
-    directives: {
-      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-      'script-src': ["'self'", "'unsafe-inline'", 'https://www.google-analytics.com', 'https://code.jquery.com', 'https://cdn.jsdelivr.net']
-    },
-}));
+//app.use(helmet.contentSecurityPolicy({
+    //directives: {
+      //...helmet.contentSecurityPolicy.getDefaultDirectives(),
+      //'script-src': ["'self'", "'unsafe-inline'", 'https://www.google-analytics.com', 'https://code.jquery.//com', 'https://cdn.jsdelivr.net']
+    //},
+//}));
 
 app.use(express.urlencoded({ extend:true }));//diz que podemos postar formulários para dentro da aplicação
 app.use(express.json());
