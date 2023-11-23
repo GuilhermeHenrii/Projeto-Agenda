@@ -32,14 +32,14 @@ const MongoStore = require('connect-mongo');//diz que a sessão será salva na b
 const flash = require('connect-flash');//mensagens autodestrutivas e instantaneas, são salvas na sessão
 
 
-app.use((req, res, next) => { // redirecionando rotas https para http (visto que não possuo um domínio)
-    if(req.secure){
-        res.redirect('http://' + req.headers.host + req.url);
-        next();
-    } else {
-        next();
-    }
-})
+// app.use((req, res, next) => { // redirecionando rotas https para http (visto que não possuo um domínio)
+    // if(req.secure){
+        // res.redirect('http://' + req.headers.host + req.url);
+        // next();
+    // } else {
+        // next();
+    // }
+// })
 
 
 const routes = require('./routes');//são as rotas da aplicação
