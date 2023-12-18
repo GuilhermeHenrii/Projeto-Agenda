@@ -18,7 +18,7 @@ Foi muito interessante trabalhar com uma server-side rendered, gostei muito do j
 
 ## Layout web
 ![Web 1](./assets/desktop-agenda.PNG)
-![Web 2](./assets/tela-de-contatos-agenda.PNG.PNG)
+![Web 2](./assets/tela-de-contatos-agenda.PNG)
 ![Web 3](./assets/cadastro-de-contatos-agenda.PNG)
 
 
