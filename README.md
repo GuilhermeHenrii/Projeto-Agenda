@@ -1,4 +1,4 @@
-# Big Game Survey 
+# Agenda de contatos
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/GuilhermeHenrii/Projeto-Agenda/blob/main/LICENSE) 
 
 # Sobre o projeto
